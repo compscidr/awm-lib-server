@@ -15,6 +15,12 @@ The idea with this project is that it is a fully-open (both data and source)
 alternative to other libraries and apps which provide similar collection of
 bandwidth tests and device density, but often do so with closed source, closed
 data or entirely closed initiatives.
+
+The requests are processed by the `index.php` file which is setup to handle
+POST requests with `Content-Type` set to `application/json`. If the requests
+are malformed or missing mandatory fields, HTTP errors are thrown and an error
+message is returned in the body.
+
 ```
 {
   "awm-measure": {
@@ -78,7 +84,6 @@ Here is an example request with values filled in:
   }
 }
 ```
-
 
 The results are stored in two tables. The first stores the reporting device
 along with identifying information such as mac addresses of various interfaces
