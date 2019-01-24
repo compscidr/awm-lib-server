@@ -20,6 +20,8 @@ data or entirely closed initiatives.
   "awm-measure": {
     "reporting_device": {
       "uuid": string,
+      "ipv4_address": string,
+      "ipv6_address": string,
       "timestamp": string,
       "longitude": string,
       "latitude": string,
@@ -44,6 +46,39 @@ data or entirely closed initiatives.
   }
 }
 ```
+
+Here is an example request with values filled in:
+```
+{
+  "awm-measure": {
+    "reporting_device": {
+      "uuid": "123e4567-e89b-12d3-a456-556642440000",
+      "ipv4_address": "97.107.187.21",
+      "ipv6_address": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+      "timestamp": "2016-11-16 06:43:19.77",
+      "longitude": "49.2730073",
+      "latitude": "-122.7726766",
+      "bt_mac_address": "00-14-22-01-23-45",
+      "wifi_mac_address": "11-14-22-01-23-45",
+      "OS": "android",
+      "battery_life": "98.5",
+      "has_cellular_internet": false,
+      "has_wifi_internet": true,
+      "cellular_throughput": 0,
+      "wifi_throughput": 1.5,
+      "cellular_ping": 0,
+      "wifi_ping": 15,
+      "cellular_operator": "Rogers",
+      "cellular_network_type": 0
+    },
+    "devices": [
+      { "mac_address": "22-14-22-01-23-45", "mac_type": 0, "network_name" : "rtr" },
+      { "mac_address": "33-14-22-01-23-45", "mac_type": 1, "network_name" : "jasonbt" }
+    ]
+  }
+}
+```
+
 
 The results are stored in two tables. The first stores the reporting device
 along with identifying information such as mac addresses of various interfaces
