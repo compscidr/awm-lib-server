@@ -109,7 +109,6 @@ if(array_key_exists("devices", $awm_measure)) {
     `mac_type`, `network_name`) VALUES ($insertid, $macaddress,
     $device[mac_type], '$device[network_name]')
 EOT;
-    echo $sql;
     $mysqli->real_query($sql);
     if($mysqli->connect_errno){
       $mysqli->close();
