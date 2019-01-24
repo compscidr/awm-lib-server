@@ -23,7 +23,7 @@ message is returned in the body.
 
 ```
 {
-  "awm-measure": {
+  "awm_measure": {
     "reporting_device": {
       "uuid": string,
       "ipv4_address": string,
@@ -56,7 +56,7 @@ message is returned in the body.
 Here is an example request with values filled in:
 ```
 {
-  "awm-measure": {
+  "awm_measure": {
     "reporting_device": {
       "uuid": "123e4567-e89b-12d3-a456-556642440000",
       "ipv4_address": "97.107.187.21",

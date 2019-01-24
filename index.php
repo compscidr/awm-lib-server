@@ -31,8 +31,8 @@ if($data == null) {
 }
 
 //make sure the input is well formed and contains stats
-if(array_key_exists("awm-measure", $data)) {
-  $awm_measure = $data["awm-measure"];
+if(array_key_exists("awm_measure", $data)) {
+  $awm_measure = $data["awm_measure"];
 } else {
   http_response_code(400);
   echo "Malformed data: missing awm-measure";
