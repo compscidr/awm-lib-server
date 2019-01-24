@@ -1,5 +1,5 @@
 <?php
-require_once("config.php");
+require_once("common.php");
 $data = json_decode(file_get_contents('php://input'), true);
 if($data == null) {
   http_response_code(400);
@@ -122,55 +122,5 @@ EOT;
 } else {
   echo "no devices found";
 }
-
-
-//http://www.onurguzel.com/storing-mac-address-in-a-mysql-database/
-function macstringtobigint($mac) {
-  //strip out the colons from the mac address string
-  $base10mac = str_replace(":", "", $mac);
-
-  return base_convert($base10mac, 16, 10);
-}
-
-/*
-
-//check for BT stats
-if(array_key_exists("bt", $stats)) {
-  $mysqli = attemptConnect();
-  if($mysqli->connect_error){
-    return;
-  }
-  $btstats = $stats["bt"];
-  foreach($btstats as $btstat) {
-    echo "LONG: $btstat[0] ";
-    echo "LAT: $btstat[1] ";
-    echo "BTDEVICES: $btstat[2]\n";
-
-    $sql = "INSERT into `stats` (`timestamp`, `longitude`, `latitude`, `btdevices`, `wifidevices`) VALUES (NOW(),$btstat[0],$btstat[1], '$btstat[2]', 0)";
-    echo $sql;
-    $mysqli->real_query($sql);
-  }
-  $mysqli->close();
-}
-
-if(array_key_exists("wifi", $stats)) {
-  $mysqli = attemptConnect();
-  if($mysqli->connect_error){
-    return;
-  }
-  $wifistats = $stats["wifi"];
-  foreach($wifistats as $wifistat) {
-    echo "LONG: $wifistat[0] ";
-    echo "LAT: $wifistat[1] ";
-    echo "WIFIDEVICES: $wifistat[2]\n";
-
-    $sql = "INSERT into `stats` (`timestamp`, `longitude`, `latitude`, `btdevices`, `wifidevices`) VALUES (NOW(),$wifistat[0],$wifistat[1], 0, '$wifistat[2]')";
-    echo $sql;
-    $mysqli->real_query($sql);
-  }
-  $mysqli->close();
-}
-
-*/
 
 ?>
