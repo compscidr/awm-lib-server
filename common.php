@@ -2,8 +2,7 @@
 require_once("config.php");
 
 function attemptConnect() {
-  $mysqli = new mysqli($config["host"], $config["username"],
-    $config["password"], $config["dbname"]);
+  $mysqli = new mysqli(HOST, USERNAME, PASSWORD, DBNAME);
   return $mysqli;
 }
 
