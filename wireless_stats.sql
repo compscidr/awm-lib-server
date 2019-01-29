@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 25, 2019 at 09:02 PM
+-- Generation Time: Jan 28, 2019 at 05:19 PM
 -- Server version: 5.7.25-0ubuntu0.18.04.2
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `wireless_stats`
 --
+CREATE DATABASE IF NOT EXISTS `wireless_stats` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `wireless_stats`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `observed_device`
+--
+
+DROP TABLE IF EXISTS `observed_device`;
+CREATE TABLE IF NOT EXISTS `observed_device` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reporting_device_id` int(11) NOT NULL,
+  `mac_address` bigint(20) NOT NULL,
+  `mac_type` tinyint(4) NOT NULL,
+  `network_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reporting_device_id` (`reporting_device_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -26,8 +45,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `reporting_device`
 --
 
-CREATE TABLE `reporting_device` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `reporting_device`;
+CREATE TABLE IF NOT EXISTS `reporting_device` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `bt_mac_address` bigint(20) NOT NULL,
   `wifi_mac_address` bigint(20) NOT NULL,
@@ -45,28 +65,20 @@ CREATE TABLE `reporting_device` (
   `cellular_ping` int(11) NOT NULL,
   `wifi_ping` int(11) NOT NULL,
   `cellular_operator` varchar(255) NOT NULL,
-  `cellular_network_type` int(11) NOT NULL
+  `cellular_network_type` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
+-- Constraints for dumped tables
 --
 
 --
--- Indexes for table `reporting_device`
+-- Constraints for table `observed_device`
 --
-ALTER TABLE `reporting_device`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `observed_device`
+  ADD CONSTRAINT `reporting_device_id` FOREIGN KEY (`reporting_device_id`) REFERENCES `reporting_device` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `reporting_device`
---
-ALTER TABLE `reporting_device`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
