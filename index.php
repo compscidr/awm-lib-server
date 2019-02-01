@@ -119,7 +119,7 @@ EOT;
   }
   $mysqli->close();
 } else {
-  echo "no devices found";
+  echo "No devices found";
 }
 
 ?>
