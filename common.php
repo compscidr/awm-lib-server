@@ -14,4 +14,45 @@ function macstringtobigint($mac) {
   return base_convert($base10mac, 16, 10);
 }
 
+/**
+ * This class represents the device which made the observations of other
+ * devices nearby. Since this is the one with a GPS, it has a position
+ * associated with it. The id field is the id in the database, not the uuid.
+ */
+class Observer {
+  private $id;
+  private $longitude;
+  private $latitude;
+
+  function __construct($id, $longitude, $latitude) {
+    $this->id = $id;
+    $this->$longitude = $longitude;
+    $this->$latitude = $latitude;
+  }
+}
+
+function getObservers($latitude_top_left, $longitude_top_left,
+  $latitude_bottom_right, $longitude_bottom_right) {
+  $mysqli = attemptConnect();
+  if($mysqli->connect_error){
+    return;
+  }
+
+  $sql = "SELECT id, longitude, latitude from reporting_device WHERE longitude > '$longitude_top_left' AND longitude < '$longitude_bottom_right' AND latitude > '$latitude_top_left' AND latitude < '$latitude_bottom_right'";
+  $result = $mysqli->query($sql);
+  if($result !== false && $result->num_rows == 0) {
+    $mysqli->close();
+    return;
+  }
+
+  echo "<br/>";
+  while($row = $result->fetch_row()) {
+    echo "$row[0]: ($row[1], $row[2])<br/>";
+  }
+
+  $mysqli->close();
+}
+
+
+
 ?>
