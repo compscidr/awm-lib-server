@@ -78,7 +78,7 @@ if($mysqli->connect_error){
           return;
         }
 
-        $sql = "SELECT DISTINCT longitude, latitude from reporting_device WHERE longitude != 0";
+        $sql = "SELECT t.longitude, t.latitude, MAX(t.count) as count FROM ((SELECT r.id, r.longitude, r.latitude, COUNT(o.reporting_device_id) as count, o.mac_type from reporting_device as r INNER JOIN observed_device o ON r.id = o.reporting_device_id WHERE r.longitude != 0 AND o.mac_type = 0 GROUP BY o.reporting_device_id) as t) GROUP BY t.longitude, t.latitude";
         $result = $mysqli->query($sql);
         if($result !== false && $result->num_rows == 0) {
           $mysqli->close();
@@ -86,14 +86,34 @@ if($mysqli->connect_error){
         }
 
         while($row = $result->fetch_row()) {
-          echo "{location: new google.maps.LatLng($row[1], $row[0]), weight: 10},\n";
+          echo "{location: new google.maps.LatLng($row[1], $row[0]), weight: $row[2]},\n";
         }
 
         $mysqli->close();
         ?>
       ] }
 
-      function getWiFiPoints() { return [] }
+      function getWiFiPoints() { return [
+        <?php
+        $mysqli = attemptConnect();
+        if($mysqli->connect_error){
+          return;
+        }
+
+        $sql = "SELECT t.longitude, t.latitude, MAX(t.count) as count FROM ((SELECT r.id, r.longitude, r.latitude, COUNT(o.reporting_device_id) as count, o.mac_type from reporting_device as r INNER JOIN observed_device o ON r.id = o.reporting_device_id WHERE r.longitude != 0 AND o.mac_type = 1 GROUP BY o.reporting_device_id) as t) GROUP BY t.longitude, t.latitude";
+        $result = $mysqli->query($sql);
+        if($result !== false && $result->num_rows == 0) {
+          $mysqli->close();
+          return;
+        }
+
+        while($row = $result->fetch_row()) {
+          echo "{location: new google.maps.LatLng($row[1], $row[0]), weight: $row[2]},\n";
+        }
+
+        $mysqli->close();
+        ?>
+      ] }
 
       </script>
       <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
