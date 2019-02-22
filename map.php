@@ -34,8 +34,8 @@ if($mysqli->connect_error){
       var map, heatmap;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 49.2173918, lng: -122.6789715},
-          zoom: 10
+          center: {lat: 36.6270221, lng: -91.6137488},
+          zoom: 4.0
         });
 
         heatmap = new google.maps.visualization.HeatmapLayer({
