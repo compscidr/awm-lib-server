@@ -106,9 +106,13 @@ if(array_key_exists("devices", $awm_measure)) {
     $macaddress = macstringtobigint($device['mac_address']);
     $sql = <<<EOT
     INSERT INTO `observed_device` (`reporting_device_id`, `mac_address`,
-    `mac_type`, `network_name`) VALUES ($insertid, $macaddress,
-    $device[mac_type], '$device[network_name]')
+    `mac_type`, `network_name`, `signal_strength` , `frequency`, 
+    `channel_width`, `security`) VALUES ($insertid, $macaddress,
+    $device[mac_type], '$device[network_name]', 
+    $device[signal_strength], $device[frequency], 
+    $device[channel_width], '$device[security]')
 EOT;
+    echo "SQL: $sql";
     $mysqli->real_query($sql);
     if($mysqli->connect_errno){
       $mysqli->close();
@@ -121,5 +125,4 @@ EOT;
 } else {
   echo "No devices found";
 }
-
 ?>
