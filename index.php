@@ -52,7 +52,8 @@ if(array_key_exists("reporting_device", $awm_measure)) {
   $bt_mac_address = macstringtobigint($rd['bt_mac_address']);
   $wifi_mac_address = macstringtobigint($rd['wifi_mac_address']);
   $longitude = floatval($rd['longitude']);
-  $latitude = floatval($rd['latitude']);
+  $latitude = floatval($rd['latitude']); 
+  
   $battery = floatval($rd['battery_life']);
   if(!isset($rd['has_cellular_internet']) || !$rd['has_cellular_internet']) {
     $rd['has_cellular_internet'] = 0;
@@ -112,7 +113,6 @@ if(array_key_exists("devices", $awm_measure)) {
     $device[signal_strength], $device[frequency], 
     $device[channel_width], '$device[security]')
 EOT;
-    echo "SQL: $sql";
     $mysqli->real_query($sql);
     if($mysqli->connect_errno){
       $mysqli->close();

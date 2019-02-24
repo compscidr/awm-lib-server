@@ -14,6 +14,14 @@ function macstringtobigint($mac) {
   return base_convert($base10mac, 16, 10);
 }
 
+function int2macaddress($int) {
+    $hex = base_convert($int, 10, 16);
+    while (strlen($hex) < 12)
+        $hex = '0'.$hex;
+    return strtoupper(implode(':', str_split($hex,2)));
+}
+
+
 /**
  * This class represents the device which made the observations of other
  * devices nearby. Since this is the one with a GPS, it has a position
