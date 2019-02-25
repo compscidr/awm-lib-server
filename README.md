@@ -11,6 +11,9 @@ to a server running this software. The server stores the data in a mysql db and
 also provides some limited visualisation of this data. The raw data is also
 available for analysis and is open source, along with this software.
 
+An example visualisaiton of the data is provided, which is running the code from this repo:
+https://test.rightmesh.io/awm-lib-server/map.php
+
 The idea with this project is that it is a fully-open (both data and source)
 alternative to other libraries and apps which provide similar collection of
 bandwidth tests and device density, but often do so with closed source, closed
@@ -45,9 +48,27 @@ message is returned in the body.
       "cellular_network_type": int
     },
     "devices": [
-      { "mac_address": mac_address, "device_type": device_type, "network_name" : network_name },
+      { 
+        "mac_address": string,
+        "signal_strength": int,
+        "frequency": int,
+        "channel_width": channel_width,
+        "security": string,
+        "device_type": string,
+        "mac_type: int,
+        "network_name" : string,
+      },
           ...
-      { "mac_address": mac_address, "device_type": device_type, "network_name" : network_name },
+      { 
+        "mac_address": string,
+        "signal_strength": int,
+        "frequency": int,
+        "channel_width": channel_width,
+        "security": string,
+        "device_type": string,
+        "mac_type: int,
+        "network_name" : string,
+      },
     ]
   }
 }
@@ -106,9 +127,9 @@ recorded is a list of Wi-Fi or Bluetooth mac addresses which were observed by
 the particular observing device at the moment in time. We also capture either
 the Wi-Fi SSID if possible or the bluetooth device name.
 
-| id | reporting_device_id | mac_address | mac_type | network_name
-|---|---|---|---|---|
-| int | int | bigint | tinyint | varchar(255) |
+| id | reporting_device_id | mac_address | mac_type | network_name | signal_strength | frequency | channel_width | security |
+|---|---|---|---|---|---|---|---|---|
+| int | int | bigint | tinyint | varchar(255) | int | int | int | varchar(255) |
 
 This allows processing later on to be accomplished in time, and filtered by
 reporting device if necessary. Observed devices could also be filtered and
