@@ -14,6 +14,9 @@ available for analysis and is open source, along with this software.
 An example visualisaiton of the data is provided, which is running the code from this repo:
 https://test.rightmesh.io/awm-lib-server/map.php
 
+![Alt text](/screenshots/1.png?raw=true "Screenshot of data in South America")
+![Alt text](/screenshots/2.png?raw=true "Screenshot of data in Northern Canada")
+
 The idea with this project is that it is a fully-open (both data and source)
 alternative to other libraries and apps which provide similar collection of
 bandwidth tests and device density, but often do so with closed source, closed
